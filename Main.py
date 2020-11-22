@@ -6,12 +6,20 @@ faceClassif = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 
 while True:
   ret,frame = cap.read()
+  imageAux = image.copy()
   gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
   faces = faceClassif.detectMultiScale(gray, 1.3, 5)
 
+  count = 0
+
   for (x,y,w,h) in faces:
     cv2.rectangle(frame, (x,y),(x+w,y+h),(0,255,0),2)
+    rostro = imageAux[y:y+h,x:x+w]
+    rostro = cv2.resize(rostro,(150,150),interpolation=cv2.INTER_CUBIC)
+    cv2.imwrite('rostro_{}.jpg'.format(count),rostro)
+
+
 
   cv2.imshow('frame',frame)
   
