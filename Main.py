@@ -10,12 +10,12 @@ while True:
   imageAux = image.copy()
   gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
-  faces = faceClassif.detectMultiScale(gray, 1.3, 5)
+  faces = faceClassif.detectMultiScale(gray, 1.1, 5)
 
   count = 0
 
   for (x,y,w,h) in faces:
-    cv2.rectangle(image, (x,y),(x+w,y+h),(0,255,0),2)
+    cv2.rectangle(image, (x,y),(x+w,y+h),(128,0,255),2)
     rostro = imageAux[y:y+h,x:x+w]
     rostro = cv2.resize(rostro,(150,150),interpolation=cv2.INTER_CUBIC)
     cv2.imwrite('rostro_{}.png'.format(count),rostro)
