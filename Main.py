@@ -1,4 +1,4 @@
-import cv2
+from cv2 import cv2
 import numpy as np
 import imutils
 # Capturando video
@@ -141,8 +141,20 @@ while True:
 						# cv2.putText(ROI,'{}'.format(fingers),tuple(fin[i]), 1, 1.7,(color_fingers),1,cv2.LINE_AA)
 				
 				# Se visualiza el número de dedos levantados en el rectángulo izquierdo
-				if fingers > 0: 
-					cv2.putText(frame,'{} dedos levantados'.format(fingers),(0,45), 1, 2,(color_fingers),2,cv2.LINE_AA)
+				if fingers >= 0: 
+					
+					if fingers == 0:
+						cv2.putText(frame,'{} Alerta de violencia! Llamando 911...'.format(fingers),(0,45), 1, 2,(color_fingers),2,cv2.LINE_AA)
+					elif fingers == 1:
+						cv2.putText(frame,'{} Alerta de acoso!'.format(fingers),(0,45), 1, 2,(color_fingers),2,cv2.LINE_AA)
+					elif fingers == 2:
+						cv2.putText(frame,'{} Alerta de violencia domestica!'.format(fingers),(0,45), 1, 2,(color_fingers),2,cv2.LINE_AA)
+					elif fingers == 3:
+						cv2.putText(frame,'{} Alerta de incendio! Llamando a los bomberos'.format(fingers),(0,45), 1, 2,(color_fingers),2,cv2.LINE_AA)
+					elif fingers == 4:
+						cv2.putText(frame,'{} Alerta! Necesita primeros auxilios'.format(fingers),(0,45), 1, 2,(color_fingers),2,cv2.LINE_AA)
+					else:
+						cv2.putText(frame,'{} dedos levantados'.format(fingers),(0,45), 1, 2,(color_fingers),2,cv2.LINE_AA)
 				
 		# cv2.imshow('th',th)
 	
