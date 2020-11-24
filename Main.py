@@ -160,7 +160,8 @@ while True:
 				
 		# cv2.imshow('th',th)
 			
-	cv2.putText(frame,'Presione G para reconocer gestos; Q para salir',(0, 650), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 2, cv2.LINE_AA, False)
+	cv2.putText(frame,'Presione G para reconocer gestos; Q para quitar gestos',(0, 630), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 2, cv2.LINE_AA, False)
+	cv2.putText(frame,'Presione ESC para salir',(0, 660), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 2, cv2.LINE_AA, False)
 
 	k = cv2.waitKey(20)
 	if k == ord('g'):
