@@ -159,8 +159,8 @@ while True:
 						cv2.putText(frame,'{} dedos levantados'.format(fingers),(0,45), 1, 2,(color_fingers),2,cv2.LINE_AA)
 				
 		# cv2.imshow('th',th)
-	
-	cv2.imshow('Frame',frame)
+			
+	cv2.putText(frame,'Presione G para reconocer gestos; Q para salir',(0, 650), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 2, cv2.LINE_AA, False)
 
 	k = cv2.waitKey(20)
 	if k == ord('g'):
@@ -169,6 +169,6 @@ while True:
 		bg = None
 	if k == 27:
 		break
-	
+	cv2.imshow('Frame',frame)
 cap.release()
 cv2.destroyAllWindows()
