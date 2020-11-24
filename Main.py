@@ -150,9 +150,11 @@ while True:
 					elif fingers == 2:
 						cv2.putText(frame,'{} Alerta de violencia domestica!'.format(fingers),(0,45), 1, 2,(color_fingers),2,cv2.LINE_AA)
 					elif fingers == 3:
-						cv2.putText(frame,'{} Alerta de incendio! Llamando a los bomberos'.format(fingers),(0,45), 1, 2,(color_fingers),2,cv2.LINE_AA)
+						cv2.putText(frame,'{} Alerta de incendio! Llamando a los bomberos...'.format(fingers),(0,45), 1, 2,(color_fingers),2,cv2.LINE_AA)
 					elif fingers == 4:
 						cv2.putText(frame,'{} Alerta! Necesita primeros auxilios'.format(fingers),(0,45), 1, 2,(color_fingers),2,cv2.LINE_AA)
+					elif fingers == 5:
+						cv2.putText(frame,'{} Alerta de inundacion'.format(fingers),(0,45), 1, 2,(color_fingers),2,cv2.LINE_AA)
 					else:
 						cv2.putText(frame,'{} dedos levantados'.format(fingers),(0,45), 1, 2,(color_fingers),2,cv2.LINE_AA)
 				
