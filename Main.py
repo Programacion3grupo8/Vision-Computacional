@@ -1,6 +1,7 @@
 from cv2 import cv2
 import numpy as np
 import imutils
+import os
 # Capturando video
 cap = cv2.VideoCapture(0,cv2.CAP_DSHOW)
 # cap = cv2.VideoCapture('20201121_174929.mp4')
@@ -9,20 +10,14 @@ bg = None
 
 #Ingresamos el algoritmo
 faceClassif = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
-
-# COLORES PARA VISUALIZACIÓN
-color_start = (204,204,0)
-color_end = (204,0,204)
-color_far = (255,0,0)
-
-color_start_far = (204,204,0)
-color_far_end = (204,0,204)
-color_start_end = (0,255,255)
+dataPath = 'Rostro reconocido'
+imagePaths = os.listdir(dataPath)
+face_recognizer = cv2.face.EigenFaceRecognizer_create()
+face_recognizer.read('modeloEigenFace.xml')
+# faceClassif = cv2.CascadeClassifier(cv2.data.haarcascades+'haarcascade_frontalface_default.xml')
 
 color_contorno = (0,255,0)
 color_ymin = (0,130,255) # Punto más alto del contorno
-#color_angulo = (0,255,255)
-#color_d = (0,255,255)
 color_fingers = (0,255,255)
 
 while True:
@@ -35,11 +30,22 @@ while True:
 	frameAux = frame.copy()
 
 	gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-
+	auxFrame = gray.copy()
 	faces = faceClassif.detectMultiScale(gray, 1.3, 5)
 
 	for (x,y,w,h) in faces:
-		cv2.rectangle(frame, (x,y),(x+w,y+h),(0,255,0),2)
+		rostro = auxFrame[y:y+h,x:x+w]
+		rostro = cv2.resize(rostro,(150,150),interpolation= cv2.INTER_CUBIC)
+		result = face_recognizer.predict(rostro)
+		cv2.putText(frame,'{}'.format(result),(x,y-5),1,1.3,(255,255,0),1,cv2.LINE_AA)
+		
+		# EigenFaces
+		if result[1] < 5700:
+			cv2.putText(frame,'Rostro conocido',(x,y-25),2,1.1,(0,255,0),1,cv2.LINE_AA)
+			cv2.rectangle(frame, (x,y),(x+w,y+h),(0,255,0),2)
+		else:
+			cv2.putText(frame,'Desconocido',(x,y-20),2,0.8,(0,0,255),1,cv2.LINE_AA)
+			cv2.rectangle(frame, (x,y),(x+w,y+h),(0,0,255),2)
 
 	# Detectando dedos
 	if bg is not None:
@@ -161,10 +167,9 @@ while True:
 		# cv2.imshow('th',th)
 	
 	cv2.imshow('Frame',frame)
+	bg = cv2.cvtColor(frameAux,cv2.COLOR_BGR2GRAY)
 
 	k = cv2.waitKey(20)
-	if k == ord('g'):
-		bg = cv2.cvtColor(frameAux,cv2.COLOR_BGR2GRAY)
 	if k == ord('q'):
 		bg = None
 	if k == 27:
