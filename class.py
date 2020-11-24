@@ -138,6 +138,7 @@ class Reconocimiento:
 
             faces = faceClassif.detectMultiScale(gray, 1.3, 5)
 
+            cv2.putText(frame,'Presione ESC para salir',(0, 670),2,0.8,(0,0,0),1,cv2.LINE_AA)
             for (x,y,w,h) in faces:
                 cv2.rectangle(frame, (x,y),(x+w,y+h),(0,255,0),2)
 
