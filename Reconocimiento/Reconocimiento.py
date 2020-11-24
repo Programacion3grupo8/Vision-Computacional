@@ -2,8 +2,8 @@ import cv2
 import os
 import imutils
 
-personName = 'Enmanuel'
-dataPath = 'C:/Users/elpip/OneDrive/Documentos/GitHub/Vision-Computacional/Reconocimiento/Data'
+personName = 'Enmanuel2'
+dataPath = 'C:/Users/elpip/Desktop/Reconocimiento/Data'
 personPath = dataPath + '/' + personName
 
 if not os.path.exists(personPath):
@@ -11,7 +11,7 @@ if not os.path.exists(personPath):
     os.makedirs(personPath)
 
 
-cap = cv2.VideoCapture('enma.mp4')
+cap = cv2.VideoCapture('nuel.mp4')
 
 faceClassif = cv2.CascadeClassifier(cv2.data.haarcascades+'haarcascade_frontalface_default.xml')
 count = 0
