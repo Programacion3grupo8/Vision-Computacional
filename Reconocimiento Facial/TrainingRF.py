@@ -4,7 +4,7 @@ import numpy as np
 
 dataPath =  'C:/Users/elpip/Desktop/Reconocimiento/Data'
 peopleList = os.listdir(dataPath)
-print('Lista de personas: ', peopleList)
+print('Personas reconocidas: ', peopleList)
 
 labels = []
 facesData = []
@@ -24,14 +24,14 @@ for nameDir in peopleList:
 	label = label + 1
 
 print('labels= ',labels)
-print('Número de etiquetas 0: ',np.count_nonzero(np.array(labels)==0))
-print('Número de etiquetas 1: ',np.count_nonzero(np.array(labels)==1))
+print('Número de rostro 0: ',np.count_nonzero(np.array(labels)==0))
+print('Número de rostro 1: ',np.count_nonzero(np.array(labels)==1))
 
 
 face_recognizer= cv2.face.EigenFaceRecognizer_create()
 
 
-print("Entrenando...")
+print("Creando archivo...")
 
 face_recognizer.train(facesData, np.array(labels))
 
