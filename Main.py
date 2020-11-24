@@ -6,7 +6,7 @@ faceClassif = cv2.CascadeClassifier(cv2.data.haarcascades+'haarcascade_frontalfa
 
 while True:
  # ret,frame = cap.read()
-  image = cv2.imread('oficina.png')
+  image = cv2.imread('oficina.jpg')
   imageAux = image.copy()
   gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
@@ -18,7 +18,7 @@ while True:
     cv2.rectangle(image, (x,y),(x+w,y+h),(128,0,255),2)
     rostro = imageAux[y:y+h,x:x+w]
     rostro = cv2.resize(rostro,(150,150),interpolation=cv2.INTER_CUBIC)
-    cv2.imwrite('rostro_{}.png'.format(count),rostro)
+    cv2.imwrite('rostro_{}.jpg'.format(count),rostro)
     count = count + 1
 
     cv2.imshow('rostro', rostro)
