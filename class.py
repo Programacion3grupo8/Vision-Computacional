@@ -138,6 +138,7 @@ class Reconocimiento:
 
             faces = faceClassif.detectMultiScale(gray, 1.3, 5)
 
+            cv2.putText(frame,'Presione Q para volver a tomar el fondo',(0, 645),2,0.8,(0,0,0),1,cv2.LINE_AA)
             cv2.putText(frame,'Presione ESC para salir',(0, 670),2,0.8,(0,0,0),1,cv2.LINE_AA)
             for (x,y,w,h) in faces:
                 cv2.rectangle(frame, (x,y),(x+w,y+h),(0,255,0),2)
@@ -260,13 +261,15 @@ class Reconocimiento:
                                 cv2.putText(frame,'{} dedos levantados'.format(fingers),(0,45), 1, 2,(color_fingers),2,cv2.LINE_AA)
                         
                 # cv2.imshow('th',th)
-            
-            cv2.imshow('Gestos',frame)
-            bg = cv2.cvtColor(frameAux,cv2.COLOR_BGR2GRAY)
+            else:
+                bg = cv2.cvtColor(frameAux,cv2.COLOR_BGR2GRAY)
 
             k = cv2.waitKey(20)
+            if k == ord('q'):
+                bg = None
             if k == 27:
                 break
+            cv2.imshow('Gestos',frame)
         cv2.destroyWindow('Gestos')
 
 
