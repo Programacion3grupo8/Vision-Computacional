@@ -7,7 +7,6 @@ class Reconocimiento:
     dataPath = 'Rostro reconocido'
     imagePaths = None
     face_recognizer = cv2.face.EigenFaceRecognizer_create()
-    face_recognizer.read('modeloEigenFace.xml')
     faceClassif = cv2.CascadeClassifier(cv2.data.haarcascades+'haarcascade_frontalface_default.xml')
     
     def SetDataPath():
@@ -73,10 +72,6 @@ class Reconocimiento:
 
     def Reconocer(cap):
         Reconocimiento.SetData()
-        imagePaths = os.listdir(Reconocimiento.dataPath)
-        face_recognizer = cv2.face.EigenFaceRecognizer_create()
-        face_recognizer.read('modeloEigenFace.xml')
-        faceClassif = cv2.CascadeClassifier(cv2.data.haarcascades+'haarcascade_frontalface_default.xml')
         while True:
             ret,frame = cap.read()
             if ret == False: break
