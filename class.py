@@ -30,7 +30,7 @@ class Reconocimiento:
         while True:
             ret, frame = cap.read()
             if ret == False: break
-            frame =  imutils.resize(frame, width=640)
+            frame =  imutils.resize(frame, width=900)
             frame = cv2.flip(frame,1)
             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
             auxFrame = frame.copy()
@@ -42,7 +42,7 @@ class Reconocimiento:
                 cv2.imwrite(Reconocimiento.dataPath + '/rotro_{}.jpg'.format(count),rostro)
                 count = count + 1
             cv2.imshow('Guardando rostro',frame)
-            k =  cv2.waitKey(1)
+            k = cv2.waitKey(1)
             if k == 27 or count >=100:
                 break
         cv2.destroyWindow('Guardando rostro')       
@@ -59,7 +59,7 @@ class Reconocimiento:
             facesData.append(cv2.imread(personPath,0))
             image = cv2.imread(personPath,0)
             # cv2.imshow('image',image)
-            cv2.waitKey(10)
+            # cv2.waitKey(10)
             label = label + 1
 
         # print('labels= ',labels)
