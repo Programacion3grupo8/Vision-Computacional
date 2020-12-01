@@ -17,7 +17,8 @@ class Reconocimiento:
         Reconocimiento.SetDataPath()
         Reconocimiento.imagePaths = os.listdir(Reconocimiento.dataPath)
         Reconocimiento.face_recognizer = cv2.face.EigenFaceRecognizer_create()
-        Reconocimiento.face_recognizer.read('modeloEigenFace.xml')
+        if os.path.exists('modeloEigenFace.xml'):
+            Reconocimiento.face_recognizer.read('modeloEigenFace.xml')
         Reconocimiento.faceClassif = cv2.CascadeClassifier(cv2.data.haarcascades+'haarcascade_frontalface_default.xml')
 
     def GuardarRostro(cap):
@@ -88,9 +89,10 @@ class Reconocimiento:
             for (x,y,w,h) in faces:
                 rostro = auxFrame[y:y+h,x:x+w]
                 rostro = cv2.resize(rostro,(150,150),interpolation= cv2.INTER_CUBIC)
-                result = Reconocimiento.face_recognizer.predict(rostro)
+                result = (0,5700)
+                if os.path.exists('modeloEigenFace.xml'):
+                    result = Reconocimiento.face_recognizer.predict(rostro)
                 cv2.putText(frame,'{}'.format(result),(x,y-5),1,1.3,(255,255,0),1,cv2.LINE_AA)
-                
                 # EigenFaces
                 if result[1] < 5700:
                     cv2.putText(frame,'Rostro conocido',(x,y-25),2,1.1,(0,255,0),1,cv2.LINE_AA)
